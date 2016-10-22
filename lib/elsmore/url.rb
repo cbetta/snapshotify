@@ -58,7 +58,6 @@ module Elsmore
         uri.host = parent.host if uri.host.nil? && parent
         uri
       rescue
-        print "x"
         self.valid = false
         nil
       end

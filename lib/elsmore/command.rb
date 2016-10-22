@@ -1,9 +1,14 @@
 require 'commander'
-require 'awesome_print'
 
 module Elsmore
   class Command
     include Commander::Methods
+
+    attr_accessor :emitter
+
+    def initialize
+      self.emitter = Elsmore::Emitter.new
+    end
 
     def run
       program :name, 'elsmore'
@@ -14,13 +19,17 @@ module Elsmore
         c.syntax = 'spider <url> [options]'
         c.description = 'Spiders a URL within from the given page, sticking within the original domain'
         c.action do |args, options|
-          result = Elsmore::Scraper.new(args.first).start
+          scraper = Elsmore::Scraper.new(args.first)
+          scraper.emitter = emitter
+          result = scraper.run
 
-          say "\n\nProcessed"
-          ap result[:processed]
-
-          say "Could not be processed"
-          ap result[:invalid]
+          emitter.newline
+          emitter.newline
+          emitter.say "Processed"
+          emitter.pretty result[:processed]
+          emitter.newline
+          emitter.say "Could not be processed"
+          emitter.pretty result[:invalid]
         end
       end
       run!
