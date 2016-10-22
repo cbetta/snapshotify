@@ -1,19 +1,26 @@
 require 'commander'
+require 'awesome_print'
 
 module Elsmore
   class Command
     include Commander::Methods
 
     def run
-      program :name, 'scrape'
+      program :name, 'elsmore'
       program :version, Elsmore::VERSION
-      program :description, 'Scrapes a full website'
+      program :description, 'A convenient scraper for archiving sites'
 
-      command :scrape do |c|
-        c.syntax = 'scrape <url> [options]'
-        c.description = 'Scrapes a URL'
+      command :spider do |c|
+        c.syntax = 'spider <url> [options]'
+        c.description = 'Spiders a URL within from the given page, sticking within the original domain'
         c.action do |args, options|
-          Elsmore::Scraper.new(args.first).start
+          result = Elsmore::Scraper.new(args.first).start
+
+          say "\n\nProcessed"
+          ap result[:processed]
+
+          say "Could not be processed"
+          ap result[:invalid]
         end
       end
       run!

@@ -13,9 +13,9 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
 
   s.add_development_dependency('rake')
-  s.add_development_dependency('awesome_print')
 
   s.add_dependency('commander')
   s.add_dependency('httparty')
   s.add_dependency('oga')
+  s.add_dependency('awesome_print')
 end

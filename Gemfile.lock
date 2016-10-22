@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     elsmore (0.1.0)
+      awesome_print
       commander
       httparty
       oga
@@ -30,7 +31,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  awesome_print
   elsmore!
   rake
 

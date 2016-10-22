@@ -3,9 +3,14 @@ require 'oga'
 
 module Elsmore
   class Url
+    attr_accessor :url, :parent, :valid
+
     def initialize url, parent = nil
-      @url = url
-      @parent = parent
+      self.url = url
+      self.parent = parent
+      self.valid = true
+
+      full_uri
     end
 
     def links
@@ -38,16 +43,24 @@ module Elsmore
 
     def full_uri
       @full_uri ||= begin
-        # ap @url.strip
-        uri = URI.parse(@url.strip)
-        return @parent.full_uri if uri.is_a?(URI::MailTo)
+        uri = URI.parse(url.strip)
+
+        unless uri.is_a?(URI::Generic)
+          self.valid = false
+          return nil
+        end
 
         uri = URI.parse("http://#{uri.to_s}") if uri.scheme.nil?
-        uri.host = @parent.host if uri.host.nil? && @parent
+        uri.scheme = 'http' unless ['http', 'https'].include?(uri.scheme)
+        uri.fragment = nil
+        uri.path = "/" if uri.path.empty?
+
+        uri.host = parent.host if uri.host.nil? && parent
         uri
       rescue
-        ap "Could not parse #{@url}"
-        @parent.full_uri
+        print "x"
+        self.valid = false
+        nil
       end
     end
   end
