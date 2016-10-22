@@ -26,9 +26,17 @@ module Elsmore
     private
 
     def sanitize_string
-      self.raw_url = "http#{raw_url}" if raw_url.start_with?('//')
-      self.raw_url = "#{parent.scheme}://#{parent.host}#{raw_url}" if raw_url.start_with?('/')
-      self.raw_url = "http://#{raw_url}" unless raw_url.start_with?('http://') || raw_url.start_with?('https://')
+      if raw_url.start_with?('//')
+        self.raw_url = "http:#{raw_url}"
+      elsif raw_url.start_with?('/')
+        self.raw_url = "#{parent.scheme}://#{parent.host}#{raw_url}"
+      elsif !(raw_url.start_with?('http://') || raw_url.start_with?('https://'))
+        if parent
+          self.raw_url = URI.join(parent.canonical_url, raw_url).to_s
+        else
+          self.raw_url = "http://#{raw_url}"
+        end
+      end
     end
 
     def parse_uri
