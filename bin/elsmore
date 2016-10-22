@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-
 require 'elsmore'
+require 'commander'
 
-Elsmore::Command.new.run if $0 == __FILE__
+Elsmore::Command.new.run
