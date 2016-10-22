@@ -3,7 +3,7 @@ module Elsmore
     attr_accessor :parent, :raw_url, :valid, :uri
 
     def initialize raw_url, parent
-      self.raw_url = raw_url
+      self.raw_url = raw_url.strip
       self.parent = parent
       self.valid = true
 

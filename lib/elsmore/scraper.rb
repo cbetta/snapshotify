@@ -34,7 +34,7 @@ module Elsmore
     def enqueue links
       links.each_with_index do |document, index|
         if !document.url.valid
-          emitter.x
+          emitter.unsure
           @invalid << document.url.raw_url
           next
         end

@@ -12,11 +12,15 @@ module Elsmore
     end
 
     def dot
-      print ".".colorize(:blue)
+      print ".".colorize(:green)
     end
 
     def x
       print "x".colorize(:red)
+    end
+
+    def unsure
+      print "?".colorize(:blue)
     end
 
     def pretty value
