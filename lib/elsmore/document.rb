@@ -29,5 +29,9 @@ module Elsmore
     def write!
       Elsmore::Writer.new(self).write
     end
+
+    def rewrite
+      Elsmore::Rewriter.new(self).rewrite
+    end
   end
 end

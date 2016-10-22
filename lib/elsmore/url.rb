@@ -23,6 +23,14 @@ module Elsmore
       uri.to_s
     end
 
+    def absolute_path_or_external_url
+      if parent && parent.host == host
+        uri.path
+      else
+        canonical_url
+      end
+    end
+
     private
 
     def sanitize_string

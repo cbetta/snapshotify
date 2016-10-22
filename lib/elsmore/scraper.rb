@@ -18,6 +18,7 @@ module Elsmore
         emitter.dot
 
         enqueue(document.links)
+        document.rewrite
         document.write!
 
         @processed << document.url.canonical_url
