@@ -1,5 +1,7 @@
 require 'elsmore/version'
 require 'elsmore/command'
 require 'elsmore/scraper'
-require 'elsmore/url'
+require 'elsmore/document'
 require 'elsmore/emitter'
+require 'elsmore/writer'
+require 'elsmore/url'

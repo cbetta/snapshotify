@@ -1,66 +1,42 @@
-require 'httparty'
-require 'oga'
-
 module Elsmore
   class Url
-    attr_accessor :url, :parent, :valid
+    attr_accessor :parent, :raw_url, :valid, :uri
 
-    def initialize url, parent = nil
-      self.url = url
+    def initialize raw_url, parent
+      self.raw_url = raw_url
       self.parent = parent
       self.valid = true
 
-      full_uri
-    end
-
-    def links
-      @links ||= begin
-        doc.xpath('//a').map do |element|
-          element.attribute('href')
-        end.compact.map(&:value).map do |href|
-          Elsmore::Url.new(href, self)
-        end.compact
-      end
-    end
-
-    def doc
-      @doc ||= begin
-        html = HTTParty.get(full_uri)
-        Oga.parse_html(html)
-      end
-    end
-
-    def write!
+      sanitize_string
+      parse_uri
     end
 
     def host
-      @host ||= full_uri.host
+      uri.host
     end
 
-    def full_url
-      @full_url ||= full_uri.to_s
+    def scheme
+      uri.scheme
     end
 
-    def full_uri
-      @full_uri ||= begin
-        uri = URI.parse(url.strip)
+    def canonical_url
+      uri.to_s
+    end
 
-        unless uri.is_a?(URI::Generic)
-          self.valid = false
-          return nil
-        end
+    private
 
-        uri = URI.parse("http://#{uri.to_s}") if uri.scheme.nil?
-        uri.scheme = 'http' unless ['http', 'https'].include?(uri.scheme)
-        uri.fragment = nil
-        uri.path = "/" if uri.path.empty?
+    def sanitize_string
+      self.raw_url = "http#{raw_url}" if raw_url.start_with?('//')
+      self.raw_url = "#{parent.scheme}://#{parent.host}#{raw_url}" if raw_url.start_with?('/')
+      self.raw_url = "http://#{raw_url}" unless raw_url.start_with?('http://') || raw_url.start_with?('https://')
+    end
 
-        uri.host = parent.host if uri.host.nil? && parent
-        uri
-      rescue
-        self.valid = false
-        nil
-      end
+    def parse_uri
+      self.uri = URI.parse(raw_url)
+      uri.path = "/" if uri.path.empty?
+      uri.fragment = nil
+    rescue
+      self.valid = false
     end
   end
 end

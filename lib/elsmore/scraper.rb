@@ -3,9 +3,9 @@ module Elsmore
     attr_accessor :emitter
 
     def initialize initial_url
-      seed = Elsmore::Url.new(initial_url)
+      seed = Elsmore::Document.new(initial_url)
 
-      @valid_domains = [seed.host]
+      @valid_domains = [seed.url.host]
       @unprocessed = [seed]
       @processed = []
       @invalid = []
@@ -13,14 +13,14 @@ module Elsmore
 
     def run
       while !@unprocessed.empty?
-        url = @unprocessed.shift
-        next if @processed.include?(url.full_url)
+        document = @unprocessed.shift
+        next if @processed.include?(document.url.canonical_url)
         emitter.dot
 
-        enqueue(url.links)
-        url.write!
+        enqueue(document.links)
+        document.write!
 
-        @processed << url.full_url
+        @processed << document.url.canonical_url
       end
 
       {
@@ -32,16 +32,16 @@ module Elsmore
     private
 
     def enqueue links
-      links.each_with_index do |link, index|
-        if !link.valid
+      links.each_with_index do |document, index|
+        if !document.url.valid
           emitter.x
-          @invalid << link.url
+          @invalid << document.url.raw_url
           next
         end
 
-        next if !@valid_domains.include?(link.host)
-        next if @processed.include?(link.full_url)
-        @unprocessed << link
+        next if !@valid_domains.include?(document.url.host)
+        next if @processed.include?(document.url.canonical_url)
+        @unprocessed << document
       end
     end
   end
