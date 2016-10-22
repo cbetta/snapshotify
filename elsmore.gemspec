@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/cbetta/elsmore'
   s.license     = 'MIT'
   s.require_path = 'lib'
-  s.bindir      = 'bin'
+  s.executables   = %w{ elsmore }
 
 
   s.add_development_dependency('rake')
