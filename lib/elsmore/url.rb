@@ -15,6 +15,11 @@ module Elsmore
       uri.host
     end
 
+    def parent_host
+      return unless parent
+      parent.host
+    end
+
     def scheme
       uri.scheme
     end

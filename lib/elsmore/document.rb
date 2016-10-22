@@ -19,11 +19,8 @@ module Elsmore
       end
     end
 
-    def doc
-      @doc ||= begin
-        html = HTTParty.get(url.canonical_url)
-        Oga.parse_html(html)
-      end
+    def data
+      doc.to_xml
     end
 
     def write!
@@ -32,6 +29,13 @@ module Elsmore
 
     def rewrite
       Elsmore::Rewriter.new(self).rewrite
+    end
+
+    def doc
+      @doc ||= begin
+        html = HTTParty.get(url.canonical_url)
+        Oga.parse_html(html)
+      end
     end
   end
 end

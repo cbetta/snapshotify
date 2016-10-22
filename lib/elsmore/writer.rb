@@ -1,28 +1,54 @@
 module Elsmore
   class Writer
-    attr_accessor :document
+    attr_accessor :resource
 
-    DIRNAME = 'site'
-
-    def initialize document
-      self.document = document
+    def initialize resource
+      self.resource = resource
     end
 
     def write
       write_file
     end
 
+    def canonical_filename
+      if host == parent_host
+        "#{filename}"
+      else
+        "/#{host}#{filename}"
+      end
+    end
+
+
     private
 
     def write_file
+      return if File.exist?(full_filename)
       ensure_directory full_filename
       File.open(full_filename, 'w') do |file|
-        file.write(document.doc.to_xml)
+        file.write(resource.data)
       end
     end
 
     def full_filename
-      @full_filename ||= "#{DIRNAME}/#{host}#{filename}"
+      @full_filename ||= begin
+        if host == parent_host || !parent_host
+          "#{host}#{filename}"
+        else
+          "#{parent_host}/#{host}#{filename}"
+        end
+      end
+    end
+
+    def filename
+      @filename ||= begin
+        path = resource.url.uri.path
+        if path.end_with?('/')
+          return path + 'index.html'
+        elsif !path.split('/').last.include?(".")
+          return path + '/index.html'
+        end
+        path
+      end
     end
 
     def ensure_directory filename
@@ -33,19 +59,13 @@ module Elsmore
     end
 
     def host
-      document.url.uri.host
+      resource.url.host
     end
 
-    def filename
-      @filename ||= begin
-        path = document.url.uri.path
-        if path.end_with?('/')
-          return path + 'index.html'
-        elsif !path.split('/').last.include?(".")
-          return path + '/index.html'
-        end
-        path
-      end
+    def parent_host
+      resource.url.parent_host
     end
+
+
   end
 end

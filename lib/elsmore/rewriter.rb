@@ -41,8 +41,8 @@ module Elsmore
       return unless element.attribute(key)
       url = element.attribute(key).value
       _resource = Elsmore::Resource.new(url, resource.url)
-      # resource.write!
-      element.attribute(key).value = _resource.url.canonical_url
+      _resource.write!
+      element.attribute(key).value = _resource.filename
     end
 
     def rewrite_links
