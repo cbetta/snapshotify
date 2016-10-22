@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'rubygems'
 require 'elsmore'
 
 Elsmore::Command.new.run if $0 == __FILE__
