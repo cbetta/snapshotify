@@ -1,4 +1,5 @@
 require 'awesome_print'
+require 'colorize'
 
 module Elsmore
   class Emitter
@@ -11,11 +12,11 @@ module Elsmore
     end
 
     def dot
-      print "."
+      print ".".colorize(:blue)
     end
 
     def x
-      print "x"
+      print "x".colorize(:red)
     end
 
     def pretty value

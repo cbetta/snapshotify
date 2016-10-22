@@ -18,4 +18,5 @@ Gem::Specification.new do |s|
   s.add_dependency('httparty')
   s.add_dependency('oga')
   s.add_dependency('awesome_print')
+  s.add_dependency('colorize')
 end

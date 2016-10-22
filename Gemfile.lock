@@ -3,6 +3,7 @@ PATH
   specs:
     elsmore (0.1.0)
       awesome_print
+      colorize
       commander
       httparty
       oga
@@ -13,6 +14,7 @@ GEM
     ansi (1.5.0)
     ast (2.3.0)
     awesome_print (1.7.0)
+    colorize (0.8.1)
     commander (4.4.0)
       highline (~> 1.7.2)
     highline (1.7.8)
