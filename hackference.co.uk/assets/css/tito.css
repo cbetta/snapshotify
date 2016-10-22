@@ -1,0 +1,130 @@
+.tito-wrapper {
+    width: 100%;
+    text-align: center;
+}
+
+.tito-wrapper .tito-ticket-list {
+    display: table;
+    list-style-type: none;
+    margin: 0 0 20px;
+    padding: 0;
+    width: 100%;
+}
+
+.tito-wrapper .tito-ticket:first-child {
+    border-top: 1px solid #CCC;
+}
+
+.tito-wrapper .tito-ticket {
+    padding: .9rem 0;
+    border-bottom: 1px solid #CCC;
+}
+
+.tito-wrapper .tito-ticket .tito-ticket-name-wrapper {
+    float: left;
+}
+
+.tito-wrapper .tito-ticket .tito-ticket-name-wrapper .tito-ticket-name {
+    display: inline;
+    text-align: left;
+    width: 200px;
+    vertical-align: middle;
+    line-height: 28px;
+}
+
+.tito-wrapper .tito-ticket .tito-ticket-price-quantity-wrapper {
+    float: right;
+}
+
+.tito-wrapper .tito-ticket .tito-ticket-price-quantity-wrapper .tito-ticket-price,.tito-wrapper .tito-ticket .tito-ticket-price-quantity-wrapper .tito-ticket-quantity {
+    display: inline;
+}
+
+.tito-wrapper .tito-ticket .tito-ticket-price-quantity-wrapper .tito-ticket-price,.tito-wrapper .tito-ticket .tito-ticket-price-quantity-wrapper .tito-ticket-quantity {
+    display: inline;
+}
+
+.tito-wrapper .tito-ticket .tito-ticket-price-quantity-wrapper .tito-ticket-quantity-field,.tito-ticket-donation-field {
+    width: 70px;
+    text-align: center;
+}
+
+.tito-ticket-description {
+    display: none;
+}
+
+.tab-content>.active {
+    display: block;
+}
+
+.tito-submit-wrapper {
+    text-align: center;
+}
+
+.tito-discount-code-show {
+    text-align: left;
+    line-height: 28px;
+    padding: .9rem 0;
+    float: left;
+    width: 50%;
+}
+
+.tito-submit {
+    padding: 10px 20px;
+    background: #212223;
+    color: #FFF;
+    border: 4px double #666;
+    margin: 10px 0;
+}
+
+.tito-submit:hover {
+    text-decoration: none;
+    border: 4px double #FFF;
+}
+
+.tito-badge-link {
+    font-size: .6em;
+    margin: 10px 0;
+}
+
+.tito-ticket-status-sold-out {
+    display: inline;
+    text-align: right;
+    vertical-align: middle;
+    line-height: 28px;
+    float: right;
+}
+
+.tito-discount-code-edit {
+	width: 50%;
+	float: right;
+}
+
+.tito-discount-code {
+	margin-top: 20px;
+}
+
+.tito-discount-code-field {
+	width: 70% !important;
+	float: left
+}
+
+.tito-discount-apply-button {
+	float: right;
+}
+
+@media only screen and (max-width: 768px) {
+	.tito-wrapper {
+		padding: 0px 10px;
+	}
+
+	.tito-discount-code-show {
+		float: none;
+		text-align: center;
+		width: 100%;
+	}
+
+	.tito-discount-code-edit {
+		width: 100%;
+	}
+}
