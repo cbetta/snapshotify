@@ -1,6 +1,6 @@
 module Elsmore
   class Writer
-    attr_accessor :resource
+    attr_accessor :resource, :emitter
 
     def initialize resource
       self.resource = resource
@@ -24,6 +24,9 @@ module Elsmore
     def write_file
       return if File.exist?(full_filename)
       ensure_directory full_filename
+
+      emitter.log("! Saving #{full_filename}")
+
       File.open(full_filename, 'w') do |file|
         file.write(resource.data)
       end

@@ -16,6 +16,8 @@ module Elsmore
       program :description, 'A convenient scraper for archiving sites'
       program :help, 'Author', 'Cristiano Betta <cristiano@betta.io>'
 
+      global_option('--debug') { emitter.debug! }
+
       command :snap do |c|
         c.syntax = 'spider <url> [options]'
         c.description = 'Spiders a URL within from the given page, sticking within the original domain'
@@ -35,7 +37,6 @@ module Elsmore
       end
       alias_command :'go fetch', :'snap'
       default_command :snap
-
 
       run!
     end

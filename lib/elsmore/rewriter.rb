@@ -1,6 +1,6 @@
 module Elsmore
   class Rewriter
-    attr_accessor :resource
+    attr_accessor :resource, :emitter
 
     def initialize resource
       self.resource = resource
@@ -20,7 +20,7 @@ module Elsmore
     end
 
     def write_css
-      resource.doc.xpath('//link[rel=stylesheet]').each do |element|
+      resource.doc.xpath('//link[@rel="stylesheet"]').each do |element|
         write_element(element, 'href')
       end
     end
@@ -41,7 +41,10 @@ module Elsmore
       return unless element.attribute(key)
       url = element.attribute(key).value
       _resource = Elsmore::Resource.new(url, resource.url)
+      _resource.emitter = emitter
       _resource.write!
+
+      emitter.log("# Rewriting #{url} => #{_resource.filename}") if url != _resource.filename
       element.attribute(key).value = _resource.filename
     end
 
@@ -49,8 +52,15 @@ module Elsmore
       resource.doc.xpath('//a').each do |element|
         return unless element.attribute('href')
         href = element.attribute('href').value
+
         url = Elsmore::Url.new(href, resource.url)
-        element.attribute('href').value = url.absolute_path_or_external_url
+        if url.valid
+          new_url = url.absolute_path_or_external_url
+        else
+          new_url = href
+        end
+        emitter.log("# Rewriting #{href} => #{new_url}") if href != new_url
+        element.attribute('href').value = new_url
       end
     end
   end

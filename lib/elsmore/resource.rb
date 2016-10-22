@@ -1,8 +1,8 @@
-require 'open-uri'
+require 'httparty'
 
 module Elsmore
   class Resource
-    attr_accessor :url, :filename
+    attr_accessor :url, :filename, :emitter
 
     def initialize url, parent
       self.url = Elsmore::Url.new(url, parent)
@@ -10,12 +10,13 @@ module Elsmore
 
     def write!
       writer = Elsmore::Writer.new(self)
+      writer.emitter = emitter
       writer.write
       self.filename = writer.canonical_filename
     end
 
     def data
-      @data ||= open(url.canonical_url).read
+      @data ||= HTTParty.get(url.canonical_url)
     end
   end
 end

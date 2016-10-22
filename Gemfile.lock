@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    elsmore (0.1.7)
+    elsmore (0.2.0)
       awesome_print
       colorize
       commander

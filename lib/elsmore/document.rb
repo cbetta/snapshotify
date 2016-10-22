@@ -3,7 +3,7 @@ require 'oga'
 
 module Elsmore
   class Document
-    attr_accessor :url
+    attr_accessor :url, :emitter
 
     def initialize url, parent = nil
       self.url = Elsmore::Url.new(url, parent)
@@ -24,11 +24,15 @@ module Elsmore
     end
 
     def write!
-      Elsmore::Writer.new(self).write
+      writer = Elsmore::Writer.new(self)
+      writer.emitter = emitter
+      writer.write
     end
 
     def rewrite
-      Elsmore::Rewriter.new(self).rewrite
+      rewriter = Elsmore::Rewriter.new(self)
+      rewriter.emitter = emitter
+      rewriter.rewrite
     end
 
     def doc
