@@ -19,24 +19,35 @@ module Elsmore
       global_option('--debug') { emitter.debug! }
 
       command :snap do |c|
-        c.syntax = 'spider <url> [options]'
+        c.syntax = 'spider <url>'
         c.description = 'Spiders a URL within from the given page, sticking within the original domain'
         c.action do |args, options|
           scraper = Elsmore::Scraper.new(args.first)
           scraper.emitter = emitter
-          result = scraper.run
+          scraper.run
 
           emitter.newline
           emitter.newline
           emitter.say "Processed"
-          emitter.pretty result[:processed]
+          emitter.pretty scraper.processed
           emitter.newline
           emitter.say "Could not be processed"
-          emitter.pretty result[:invalid]
+          emitter.pretty scraper.invalid
+
+          emitter.newline
+          emitter.say "Run 'elsmore serve #{args.first}' to start a webserver on port 8000 with your local copy"
         end
       end
       alias_command :'go fetch', :'snap'
       default_command :snap
+
+      command :serve do |c|
+        c.syntax = 'serve <folder_name>'
+        c.description = 'Serve local folder'
+        c.action do |args, options|
+          exec "ruby -run -ehttpd ./#{ARGV[1]} -p8000"
+        end
+      end
 
       run!
     end

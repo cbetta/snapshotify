@@ -14,7 +14,7 @@ module Elsmore
     end
 
     def newline
-      say "\n"
+      puts "\n"
     end
 
     def pretty value

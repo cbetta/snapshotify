@@ -19,11 +19,7 @@ module Elsmore
         document = unprocessed.shift
         process document
       end
-
-      {
-        processed: processed,
-        invalid: invalid
-      }
+      self
     end
 
     private
