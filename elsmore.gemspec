@@ -1,4 +1,5 @@
-require File.expand_path('lib/elsmore/version', File.dirname(__FILE__))
+$:.push File.expand_path("../lib", __FILE__)
+require "elsmore/version"
 
 Gem::Specification.new do |s|
   s.name        = 'elsmore'
