@@ -1,0 +1,5 @@
+require 'elsmore/version'
+require 'elsmore/command'
+require 'elsmore/scraper'
+require 'elsmore/spider'
+require 'elsmore/url'

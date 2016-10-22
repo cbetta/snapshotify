@@ -1,0 +1,38 @@
+PATH
+  remote: .
+  specs:
+    elsmore (0.1.0)
+      commander
+      httparty
+      oga
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ansi (1.5.0)
+    ast (2.3.0)
+    awesome_print (1.7.0)
+    commander (4.4.0)
+      highline (~> 1.7.2)
+    highline (1.7.8)
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
+    multi_xml (0.5.5)
+    oga (2.7)
+      ast
+      ruby-ll (~> 2.1)
+    rake (11.3.0)
+    ruby-ll (2.1.2)
+      ansi
+      ast
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  awesome_print
+  elsmore!
+  rake
+
+BUNDLED WITH
+   1.13.5
