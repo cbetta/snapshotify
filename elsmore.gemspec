@@ -7,11 +7,11 @@ Gem::Specification.new do |s|
   s.description = "Backup too for Hackference"
   s.authors     = ["Cristiano Betta", "Mike Elsmore"]
   s.email       = ['cbetta@gmail.com', "mike@hackference.co.uk"]
-  s.files       = Dir.glob('{lib,spec,bin}/**/*') + %w(LICENSE README.md elsmore.gemspec)
+  s.files         = `git ls-files`.split("\n")
   s.homepage    = 'https://github.com/cbetta/elsmore'
   s.license     = 'MIT'
-  s.require_path = 'lib'
-  s.executables   = ['elsmore']
+  s.require_paths = ["lib"]
+  s.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
 
 
   s.add_development_dependency('rake')
