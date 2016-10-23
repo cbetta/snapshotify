@@ -2,6 +2,8 @@
 
 A fabulous fellow who will fetch entire websites for you and rewrites them to your wishes.
 
+![Elsmore](elsmore.png)
+
 Might need a bit of a push to get him going.
 
 ```sh
