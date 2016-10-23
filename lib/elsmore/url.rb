@@ -36,6 +36,14 @@ module Elsmore
       end
     end
 
+    def resource_path
+      if parent && parent.host == host
+        uri.path
+      else
+        canonical_url.gsub('http:/', '').gsub('https:/', '')
+      end
+    end
+
     private
 
     def sanitize_string

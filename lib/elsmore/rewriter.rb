@@ -21,28 +21,28 @@ module Elsmore
 
     def write_css
       resource.doc.xpath('//link[@rel="stylesheet"]').each do |element|
-        write_element(element, 'href')
+        write_element(element, 'href', replace: true)
       end
     end
 
     def write_images
       resource.doc.xpath('//img').each do |element|
-        write_element(element, 'src')
+        write_element(element, 'src', replace: false)
       end
     end
 
     def write_js
       resource.doc.xpath('//script').each do |element|
-        write_element(element, 'src')
+        write_element(element, 'src', replace: false)
       end
     end
 
-    def write_element element, key
+    def write_element element, key, options = {}
       return unless element.attribute(key)
       url = element.attribute(key).value
       _resource = Elsmore::Resource.new(url, resource.url)
       _resource.emitter = emitter
-      _resource.write!
+      _resource.write!(options[:replace])
 
       emitter.log("# Rewriting #{url} => #{_resource.filename}") if url != _resource.filename
       element.attribute(key).value = _resource.filename
