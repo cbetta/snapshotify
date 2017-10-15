@@ -38,7 +38,6 @@ module Snapshotify
           emitter.say "Run 'snapshotify serve #{args.first}' to start a webserver on port 8000 with your local copy"
         end
       end
-      alias_command :'go fetch', :'snap'
       default_command :snap
 
       command :serve do |c|

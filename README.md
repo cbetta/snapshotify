@@ -9,7 +9,7 @@ gem install snapshotify
 
 ## To fetch website
 ```sh
-snapshotify go fetch [website_url] [--debug]
+snapshotify [website_url] [--debug]
 ```
 
 ## To serve
