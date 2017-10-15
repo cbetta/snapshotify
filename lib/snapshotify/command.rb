@@ -19,23 +19,23 @@ module Snapshotify
       global_option('--debug') { emitter.debug! }
 
       command :snap do |c|
-        c.syntax = 'spider <url>'
-        c.description = 'Spiders a URL within from the given page, sticking within the original domain'
+        c.syntax = 'snap <url>'
+        c.description = 'Spiders a URL from the given page, sticking within the original domain'
+
         c.action do |args, options|
           scraper = Snapshotify::Scraper.new(args.first)
           scraper.emitter = emitter
           scraper.run
-
-          emitter.newline
-          emitter.newline
-          emitter.say "Processed"
-          emitter.pretty scraper.processed
-          emitter.newline
-          emitter.say "Could not be processed"
-          emitter.pretty scraper.invalid
-
-          emitter.newline
-          emitter.say "Run 'snapshotify serve #{args.first}' to start a webserver on port 8000 with your local copy"
+          #
+          # emitter.newline
+          # emitter.newline
+          # emitter.say "Processed"
+          # emitter.pretty scraper.processed
+          # emitter.newline
+          # emitter.say "Could not be processed"
+          # emitter.pretty scraper.invalid
+          # emitter.newline
+          # emitter.say "Run 'snapshotify serve #{args.first}' to start a webserver on port 8000 with your local copy"
         end
       end
       default_command :snap
@@ -44,7 +44,7 @@ module Snapshotify
         c.syntax = 'serve <folder_name>'
         c.description = 'Serve local folder'
         c.action do |args, options|
-          exec "ruby -run -ehttpd ./#{ARGV[1]} -p8000"
+          exec "ruby -run -ehttpd ./snaps/#{ARGV[1]} -p8000"
         end
       end
 
