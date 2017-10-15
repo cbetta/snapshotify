@@ -26,16 +26,16 @@ module Snapshotify
           scraper = Snapshotify::Scraper.new(args.first)
           scraper.emitter = emitter
           scraper.run
-          #
-          # emitter.newline
-          # emitter.newline
-          # emitter.say "Processed"
-          # emitter.pretty scraper.processed
-          # emitter.newline
-          # emitter.say "Could not be processed"
-          # emitter.pretty scraper.invalid
-          # emitter.newline
-          # emitter.say "Run 'snapshotify serve #{args.first}' to start a webserver on port 8000 with your local copy"
+
+          emitter.newline
+          emitter.newline
+          emitter.say "Processed"
+          emitter.pretty scraper.processed_urls
+          emitter.newline
+          emitter.say "Could not be processed"
+          emitter.pretty scraper.invalid_urls
+          emitter.newline
+          emitter.say "Run 'snapshotify serve #{scraper.seed.url.host}' to start a webserver on port 8000 with your local copy"
         end
       end
       default_command :snap

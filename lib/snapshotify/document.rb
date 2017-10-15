@@ -14,15 +14,17 @@ module Snapshotify
       self.url = Snapshotify::Url.new(url, parent)
     end
 
-    # def links
-    #   @links ||= begin
-    #     doc.xpath('//a').map do |element|
-    #       element.attribute('href')
-    #     end.compact.map(&:value).map do |href|
-    #       Snapshotify::Document.new(href, url)
-    #     end.compact
-    #   end
-    # end
+    # Find the links in a page and extract all the hrefs
+    def links
+      # Find all anchor elements
+      doc.xpath('//a').map do |element|
+        # extract all the href attributes
+        element.attribute('href')
+      end.compact.map(&:value).map do |href|
+        # return them as new document objects
+        Snapshotify::Document.new(href, url)
+      end.compact
+    end
 
     # The XML data for this document
     def data
@@ -34,6 +36,13 @@ module Snapshotify
       writer = Snapshotify::Writer.new(self)
       writer.emitter = emitter
       writer.write
+    end
+
+    def valid
+      doc
+      true
+    rescue
+      false
     end
 
     # def rewrite

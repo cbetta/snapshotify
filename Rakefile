@@ -5,10 +5,10 @@ task :console do
   exec "irb -r snapshotify -I ./lib"
 end
 
-task :snap do
+task "dev:snap" do
   exec "ruby -Ilib/ bin/snapshotify https://betta.io --debug --trace"
 end
 
-task :serve do
+task "dev:serve" do
   exec "ruby -Ilib/ bin/snapshotify serve betta.io"
 end
