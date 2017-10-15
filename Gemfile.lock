@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    snapshotify (0.3.1)
+    snapshotify (0.1.0)
       awesome_print
       colorize
       commander
