@@ -1,3 +1,3 @@
-module Elsmore
+module Snapshotify
   VERSION = '0.3.1'
 end

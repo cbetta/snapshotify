@@ -1,4 +1,4 @@
-module Elsmore
+module Snapshotify
   class Writer
     attr_accessor :resource, :emitter
 

@@ -1,7 +1,7 @@
 require 'awesome_print'
 require 'colorize'
 
-module Elsmore
+module Snapshotify
   class Emitter
     attr_accessor :debug
 

@@ -1,18 +1,18 @@
 require 'httparty'
 
-module Elsmore
+module Snapshotify
   class Resource
     attr_accessor :url, :filename, :emitter, :parent
 
     def initialize url, parent
-      self.url = Elsmore::Url.new(url, parent)
+      self.url = Snapshotify::Url.new(url, parent)
       self.parent = parent
     end
 
     def write! nested_urls = false
       process_nested_urls if nested_urls
 
-      writer = Elsmore::Writer.new(self)
+      writer = Snapshotify::Writer.new(self)
       writer.emitter = emitter
       writer.write
       self.filename = writer.canonical_filename
@@ -34,7 +34,7 @@ module Elsmore
       end
 
       urls.each do |nested_url|
-        resource = Elsmore::Resource.new(nested_url, url)
+        resource = Snapshotify::Resource.new(nested_url, url)
         resource.emitter = emitter
         resource.write!
 

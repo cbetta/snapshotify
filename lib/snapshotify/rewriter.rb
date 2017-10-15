@@ -1,4 +1,4 @@
-module Elsmore
+module Snapshotify
   class Rewriter
     attr_accessor :resource, :emitter
 
@@ -40,7 +40,7 @@ module Elsmore
     def write_element element, key, options = {}
       return unless element.attribute(key)
       url = element.attribute(key).value
-      _resource = Elsmore::Resource.new(url, resource.url)
+      _resource = Snapshotify::Resource.new(url, resource.url)
       _resource.emitter = emitter
       _resource.write!(options[:replace])
 
@@ -53,7 +53,7 @@ module Elsmore
         return unless element.attribute('href')
         href = element.attribute('href').value
 
-        url = Elsmore::Url.new(href, resource.url)
+        url = Snapshotify::Url.new(href, resource.url)
         if url.valid
           new_url = url.absolute_path_or_external_url
         else

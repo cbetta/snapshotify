@@ -1,26 +1,21 @@
-# Elsmore
+# Snapshotify
 
-A fabulous fellow who will fetch entire websites for you and rewrites them to your wishes.
-
-![Elsmore](elsmore.png)
-
-Might need a bit of a push to get him going.
+A simple tool for backing up a full site into a static instance.
 
 ## To install
 ```sh
-gem install elsmore
+gem install snapshotify
 ```
 
 ## To fetch website
 ```sh
-elsmore go fetch [website_url] [--debug]
+snapshotify go fetch [website_url] [--debug]
 ```
 
 ## To serve
 ```sh
-elsmore serve [website_url]
+snapshotify serve [website_url]
 ```
-
 
 ## Todo
 

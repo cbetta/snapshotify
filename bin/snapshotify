@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+require 'snapshotify'
+require 'commander'
+
+Snapshotify::Command.new.run

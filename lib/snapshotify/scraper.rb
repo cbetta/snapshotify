@@ -1,9 +1,9 @@
-module Elsmore
+module Snapshotify
   class Scraper
     attr_accessor :emitter, :unprocessed, :processed, :invalid, :unprocessed_urls, :valid_domains
 
     def initialize initial_url
-      seed = Elsmore::Document.new(initial_url)
+      seed = Snapshotify::Document.new(initial_url)
 
       self.valid_domains = [seed.url.host]
 

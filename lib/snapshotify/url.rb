@@ -1,4 +1,4 @@
-module Elsmore
+module Snapshotify
   class Url
     attr_accessor :parent, :raw_url, :valid, :uri
 

@@ -1,12 +1,12 @@
 $:.push File.expand_path("../lib", __FILE__)
-require "elsmore/version"
+require "snapshotify/version"
 
 Gem::Specification.new do |s|
-  s.name        = 'elsmore'
-  s.version     =  Elsmore::VERSION
-  s.authors     = ["Cristiano Betta", "Mike Elsmore"]
+  s.name        = 'snapshotify'
+  s.version     =  Snapshotify::VERSION
+  s.authors     = ["Cristiano Betta"]
   s.email       = ['cbetta@gmail.com']
-  s.homepage    = "http://github.com/cbetta/elsmore"
+  s.homepage    = "http://github.com/cbetta/snapshotify"
   s.summary     = "Backup tool for Hackference"
   s.description = "Backup tool for Hackference"
   s.license     = 'MIT'

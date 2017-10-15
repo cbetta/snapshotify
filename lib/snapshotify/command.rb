@@ -1,18 +1,18 @@
 require 'commander'
 
-module Elsmore
+module Snapshotify
   class Command
     include Commander::Methods
 
     attr_accessor :emitter
 
     def initialize
-      self.emitter = Elsmore::Emitter.new
+      self.emitter = Snapshotify::Emitter.new
     end
 
     def run
-      program :name, 'elsmore'
-      program :version, Elsmore::VERSION
+      program :name, 'snapshotify'
+      program :version, Snapshotify::VERSION
       program :description, 'A convenient scraper for archiving sites'
       program :help, 'Author', 'Cristiano Betta <cristiano@betta.io>'
 
@@ -22,7 +22,7 @@ module Elsmore
         c.syntax = 'spider <url>'
         c.description = 'Spiders a URL within from the given page, sticking within the original domain'
         c.action do |args, options|
-          scraper = Elsmore::Scraper.new(args.first)
+          scraper = Snapshotify::Scraper.new(args.first)
           scraper.emitter = emitter
           scraper.run
 
@@ -35,7 +35,7 @@ module Elsmore
           emitter.pretty scraper.invalid
 
           emitter.newline
-          emitter.say "Run 'elsmore serve #{args.first}' to start a webserver on port 8000 with your local copy"
+          emitter.say "Run 'snapshotify serve #{args.first}' to start a webserver on port 8000 with your local copy"
         end
       end
       alias_command :'go fetch', :'snap'
