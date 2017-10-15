@@ -15,6 +15,7 @@ gem install snapshotify
 [2017-10-15 13:30:57] INFO  WEBrick 1.3.1
 [2017-10-15 13:30:57] INFO  ruby 2.4.2 (2017-09-14) [x86_64-darwin16]
 [2017-10-15 13:30:57] INFO  WEBrick::HTTPServer#start: pid=7103 port=8000
+```
 
 ## To fetch website
 ```sh
